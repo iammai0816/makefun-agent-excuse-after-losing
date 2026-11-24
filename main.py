@@ -15,6 +15,11 @@ EXCUSE = (
 
 
 def main() -> None:
+    # Guard the entry contract before writing: exactly one line,
+    # under 200 characters, so a future edit cannot silently
+    # change the submitted text.
+    assert "\n" not in EXCUSE, "entry must be a single line"
+    assert len(EXCUSE) < 200, "entry must be under 200 characters"
     output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(output_dir, exist_ok=True)
     entry_path = os.path.join(output_dir, "entry.txt")
